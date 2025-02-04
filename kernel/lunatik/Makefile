@@ -17,7 +17,7 @@ PKG_LICENSE:=GPL-2.0
 PKG_SOURCE_URL:=https://github.com/luainkernel/lunatik
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE:=2025-01-30
-PKG_SOURCE_VERSION:=1627efcd6d825e89bc45044405fc3c7a41baf3eb
+PKG_SOURCE_VERSION:=6498c934efbceecfc2a1dc05dd17a86b17a09f15
 
 PKG_MAINTAINER:=Lourival Vieira Neto<lourival.neto@gmail.com>
 PKG_BUILD_PARALLEL:=1
