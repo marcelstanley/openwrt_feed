@@ -1,5 +1,10 @@
 <!-- markdownlint-disable MD013 -->
+
 # OpenWrt package feed for [luainkernel](https://github.com/luainkernel)
+
+> [!WARNING]
+> This repository has been discontinued.
+> Please refer to <https://github.com/luainkernel/openwrt_feed> for the actual feed.
 
 The feed is comprised by the following packages:
 
