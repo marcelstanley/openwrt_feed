@@ -17,7 +17,7 @@ PKG_LICENSE:=GPL-2.0
 PKG_SOURCE_URL:=https://github.com/luainkernel/lunatik
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE:=2025-01-30
-PKG_SOURCE_VERSION:=6498c934efbceecfc2a1dc05dd17a86b17a09f15
+PKG_SOURCE_VERSION:=4ac8b93aa4f5e82d81e28df3f9a75d7b8a0cab89
 
 PKG_MAINTAINER:=Lourival Vieira Neto<lourival.neto@gmail.com>
 PKG_BUILD_PARALLEL:=1
@@ -36,6 +36,7 @@ else
 	KLIBC_ARCH := $(ARCH)
 endif
 
+asflags-y += -I${PWD}$(KLIBC_USR)/include/arch/$(KLIBC_ARCH)
 KLIBC_USR := /klibc/usr
 
 EXTRA_KCONFIG:= \
@@ -50,7 +51,9 @@ EXTRA_CFLAGS:= -D_LUNATIK -D_KERNEL -DLUNATIK_RUNTIME=$(CONFIG_LUNATIK_RUNTIME) 
 	-Wimplicit-fallthrough=0 -Wno-declaration-after-statement \
 	-I$(PKG_BUILD_DIR) -I$(PKG_BUILD_DIR)/include -I$(PKG_BUILD_DIR)/lua \
 	-I$(PKG_BUILD_DIR)$(KLIBC_USR)/include/arch/$(KLIBC_ARCH)
+	#-I/home/marcel/development/marcelstanley/openwrt/build_dir/target-mips_24kc_musl/linux-ath79_nand/lunatik-3.5/klibc/usr/include/arch/mips
 
+ASFLAGS += -I$(PKG_BUILD_DIR)$(KLIBC_USR)/include/arch/$(KLIBC_ARCH)
 LUA_API:= lua/lua.h lua/lauxlib.h lua/lualib.h
 
 LUNATIK_INSTALL_PATH:= /usr/sbin
@@ -114,7 +117,7 @@ define Build/Prepare
 endef
 
 define Build/Compile
-	$(KERNEL_MAKE) M="$(PKG_BUILD_DIR)" EXTRA_CFLAGS="$(EXTRA_CFLAGS)" $(EXTRA_KCONFIG) modules
+	$(KERNEL_MAKE) M="$(PKG_BUILD_DIR)" EXTRA_CFLAGS="$(EXTRA_CFLAGS)" $(EXTRA_KCONFIG) TARGET_ASFLAGS="$(ASFLAGS)" modules
 endef
 
 $(eval $(call KernelPackage,lunatik))
