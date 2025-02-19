@@ -114,6 +114,7 @@ endef
 define Build/Prepare
         $(Build/Prepare/Default)
 	cd $(PKG_BUILD_DIR) && ./gensymbols.sh $(LUA_API) > lunatik_sym.h
+	$(CP) ./Makefile.owrt $(PKG_BUILD_DIR)/Makefile
 endef
 
 define Build/Compile
